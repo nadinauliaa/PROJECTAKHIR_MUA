@@ -506,9 +506,7 @@ $first = false;
 </div>
     <div class="qris-content">
 
-        <div class="qris-img">
-            <i class='bx bx-qr-scan'></i>
-        </div>
+     <img src="images/qris.jpeg" width="220">
 
         <div class="qris-hint">
             Scan QR code menggunakan aplikasi DANA
