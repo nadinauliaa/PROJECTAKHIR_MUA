@@ -378,7 +378,7 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--brown-70
     <div class="form-row">
         <input type="text" id="inputNama" class="form-input" placeholder="Nama lengkap">
         <input type="email" id="inputEmail" class="form-input" placeholder="Email">
-        
+
     </div>
 
     <textarea type="text" id="inputHp" class="form-input" placeholder="No. HP"></textarea>
