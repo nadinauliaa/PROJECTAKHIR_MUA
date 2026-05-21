@@ -239,6 +239,7 @@ body {
         <a href="pricelist.php"><i class='fas fa-wallet'></i> Price List</a>
         <a href="jadwal.php"><i class='fas fa-calendar'></i> Jadwal</a>
         <a href="booking.php"><i class='fas fa-pen'></i> Booking</a>
+          <a href="status_booking.php"><i class='bx bx-edit'></i>Pembayaran</a>
         <a href="contact.php"><i class='fas fa-phone'></i> Contact</a>
     </div>
 

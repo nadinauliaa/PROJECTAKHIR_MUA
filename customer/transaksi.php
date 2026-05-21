@@ -2,6 +2,7 @@
 session_start();
 include '../koneksi.php';
 
+
 $setting = mysqli_fetch_assoc(
     mysqli_query($koneksi, "SELECT * FROM setting_kontak LIMIT 1")
 );

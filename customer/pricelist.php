@@ -798,6 +798,7 @@ body {
         <a href="pricelist.php" class="current"><i class='bx bx-wallet'></i> Price List</a>
         <a href="jadwal.php"><i class='bx bx-calendar'></i> Jadwal</a>
         <a href="booking.php"><i class='bx bx-edit'></i> Booking</a>
+         <a href="status_booking.php"><i class='fas fa-wallet'></i>Pembayaran</a>
         <a href="contact.php"><i class='bx bx-phone'></i> Contact</a>
     </nav>
 </div>

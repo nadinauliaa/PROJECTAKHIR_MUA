@@ -11,6 +11,7 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lato:wght@300;400;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+
     <script>
         tailwind.config = {
             theme: {
@@ -308,6 +309,7 @@ session_start();
             <a href="pricelist.php"><i class='fas fa-wallet'></i> Price List</a>
             <a href="jadwal.php"><i class='fas fa-calendar'></i> Jadwal</a>
             <a href="booking.php"><i class='fas fa-pen'></i> Booking</a>
+             <a href="status_booking.php"><i class='fas fa-wallet'></i>Pembayaran</a>
             <a href="contact.php"><i class='fas fa-phone'></i> Contact</a>
             <a href="../logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </div>

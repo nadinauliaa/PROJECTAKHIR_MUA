@@ -188,7 +188,7 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--brown-70
         <strong><?= htmlspecialchars($paket_name) ?></strong>
     </div>
 
-    <form id="detailForm" method="POST" action="transaksi.php">
+<form id="detailForm" method="POST" action="konfirmasi.php">        
         <input type="hidden" name="tanggal" value="<?= htmlspecialchars($tanggal) ?>">
         <input type="hidden" name="jadwal_id" value="<?= $jadwal_id ?>">
         <input type="hidden" name="jam" value="<?= htmlspecialchars($jam) ?>">
@@ -311,9 +311,9 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--brown-70
                 <a href="pilih_paket.php?tanggal=<?= urlencode($tanggal) ?>&jadwal_id=<?= $jadwal_id ?>&jam=<?= urlencode($jam) ?>&nama=<?= urlencode($nama) ?>&no_hp=<?= urlencode($no_hp) ?>&catatan=<?= urlencode($catatan) ?>" class="btn-outline btn-full">
                     <i class='bx bx-left-arrow-alt'></i> Kembali
                 </a>
-                <button type="submit" class="btn-primary btn-full" style="margin-top:0;">
-                    <i class='bx bx-check-circle'></i> Lanjutkan Transaksi
-                </button>
+               <button type="submit" class="btn-primary btn-full">
+    <i class='bx bx-check-circle'></i> Lanjut Konfirmasi
+</button>
             </div>
         </div>
     </form>
