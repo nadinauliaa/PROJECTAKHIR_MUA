@@ -456,14 +456,54 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--brown-70
                     <div class="metode-icon bank"><i class='bx bx-building'></i></div>
                     <div><div class="metode-text">Transfer Bank</div><div class="metode-sub">BCA, BNI, Mandiri</div></div>
                 </div>
-                <div class="bank-options show" id="bankOptions">
-                    <div class="bank-item selected" onclick="selectBank(this,'BCA')"><div class="bank-logo">BCA</div><div class="bank-info"><div class="bank-name">Bank BCA</div><div class="bank-number">8120 3456 7890</div><div class="bank-an">a.n. Brilliant Beauty Studio</div></div><button type="button" class="bank-copy" onclick="event.stopPropagation();copyRek('812034567890')" title="Salin"><i class='bx bx-copy'></i></button></div>
-                    <div class="bank-item" onclick="selectBank(this,'BNI')"><div class="bank-logo">BNI</div><div class="bank-info"><div class="bank-name">Bank BNI</div><div class="bank-number">0312 4567 8901</div><div class="bank-an">a.n. Brilliant Beauty Studio</div></div><button type="button" class="bank-copy" onclick="event.stopPropagation();copyRek('031245678901')" title="Salin"><i class='bx bx-copy'></i></button></div>
-                    <div class="bank-item" onclick="selectBank(this,'Mandiri')"><div class="bank-logo">MDR</div><div class="bank-info"><div class="bank-name">Bank Mandiri</div><div class="bank-number">1280 0098 7654</div><div class="bank-an">a.n. Brilliant Beauty Studio</div></div><button type="button" class="bank-copy" onclick="event.stopPropagation();copyRek('128000987654')" title="Salin"><i class='bx bx-copy'></i></button></div>
-                </div>
-                <div class="metode-option" onclick="selectMetode(this,'QRIS')"><div class="metode-radio"></div><div class="metode-icon qris"><i class='bx bx-qr'></i></div><div><div class="metode-text">QRIS</div><div class="metode-sub">Scan & bayar via e-wallet</div></div></div>
-               <div class="qris-box" id="qrisBox">
+               <div class="bank-options show" id="bankOptions">
 
+<?php
+$query = mysqli_query($koneksi, "SELECT * FROM metode_pembayaran 
+WHERE jenis='bank' AND is_active=1");
+
+$first = true;
+
+while($row = mysqli_fetch_assoc($query)){
+?>
+
+<div class="bank-item <?= $first ? 'selected' : ''; ?>"
+     onclick="selectBank(this,'<?= $row['nama_metode']; ?>')">
+
+    <div class="bank-logo">
+        <?= $row['nama_metode']; ?>
+    </div>
+
+    <div class="bank-info">
+        <div class="bank-name">
+            Bank <?= $row['nama_metode']; ?>
+        </div>
+
+        <div class="bank-number">
+            <?= $row['nomor']; ?>
+        </div>
+
+        <div class="bank-an">
+            a.n. <?= $row['atas_nama']; ?>
+        </div>
+    </div>
+
+    <button type="button"
+        class="bank-copy"
+        onclick="event.stopPropagation();copyRek('<?= $row['nomor']; ?>')"
+        title="Salin">
+
+        <i class='bx bx-copy'></i>
+
+    </button>
+</div>
+
+<?php
+$first = false;
+}
+?>
+
+</div>
     <div class="qris-content">
 
         <div class="qris-img">
