@@ -8,17 +8,27 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'customer') {
 }
 
 // Terima data dari jadwal_booking.php
- $tanggal   = $_GET['tanggal'] ?? '';
- $jadwal_id = $_GET['jadwal_id'] ?? '';
- $jam       = $_GET['jam'] ?? '';
- $nama      = $_GET['nama'] ?? '';
- $no_hp     = $_GET['no_hp'] ?? '';
- $catatan   = $_GET['catatan'] ?? '';
 
-if (!$tanggal || !$jadwal_id) {
+$tanggal   = $_GET['tanggal'] ?? '';
+$jadwal_id = $_GET['jadwal_id'] ?? '';
+$jam       = $_GET['jam'] ?? '';
+
+$nama      = $_GET['nama'] ?? '';
+$email     = $_GET['email'] ?? '';
+$no_hp     = $_GET['no_hp'] ?? '';
+
+$pasangan  = $_GET['pasangan'] ?? '';
+$alamat    = $_GET['alamat'] ?? '';
+$maps      = $_GET['maps'] ?? '';
+
+$catatan   = $_GET['catatan'] ?? '';
+
+
+if (!$tanggal || !isset($jadwal_id)) {
     header("Location: jadwal_booking.php");
     exit;
 }
+
 ?>
 
 <!DOCTYPE html>

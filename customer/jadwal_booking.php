@@ -323,31 +323,112 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--brown-70
             <?php endforeach; ?>
             </div>
             <?php endif; ?>
+
+<div class="form-section">
+    <span class="form-label">Pilihan Waktu</span>
+
+    <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
+        
+        <label class="slot-item available selected" 
+               style="cursor:pointer;flex:1;min-width:220px;"
+               id="modeSlot">
+            <div class="slot-left">
+                <div class="slot-radio"></div>
+                <span class="slot-time">Gunakan Jam Slot</span>
+            </div>
+            <input type="radio" name="mode_jam" value="slot" checked hidden>
+        </label>
+
+        <label class="slot-item available"
+               style="cursor:pointer;flex:1;min-width:220px;"
+               id="modeRequest">
+            <div class="slot-left">
+                <div class="slot-radio"></div>
+                <span class="slot-time">Request Jam Sendiri</span>
+            </div>
+            <input type="radio" name="mode_jam" value="request" hidden>
+        </label>
+
+    </div>
+
+    <div id="requestJamWrap" style="display:none;">
+    
+    <div class="form-row">
+        <input type="time" id="jamMulaiRequest" class="form-input">
+        <input type="time" id="jamSelesaiRequest" class="form-input">
+    </div>
+
+    <small style="display:block;margin-top:6px;color:var(--brown-400);font-size:11px;">
+        Pilih rentang jam booking
+    </small>
+
+</div>
+    
+           
+
+    <small style="display:block;margin-top:8px;color:var(--brown-400);font-size:11px;">
+    Jam yang bentrok dengan booking lain tidak dapat digunakan.
+</small>
+</div>
+
+
 <div class="form-section">
     <span class="form-label">Data Diri</span>
 
     <div class="form-row">
         <input type="text" id="inputNama" class="form-input" placeholder="Nama lengkap">
         <input type="email" id="inputEmail" class="form-input" placeholder="Email">
+        
     </div>
 
-    <div class="form-row">
-        <input type="text" id="inputHp" class="form-input" placeholder="No. HP">
-        <input type="text" id="inputPasangan" class="form-input" placeholder="Nama pasangan">
-    </div>
+    <textarea type="text" id="inputHp" class="form-input" placeholder="No. HP"></textarea>
 
     <textarea id="inputAlamat" class="form-textarea" placeholder="Alamat lengkap"></textarea>
 
     <input type="url" id="inputMaps" class="form-input" 
            placeholder="Link Google Maps / Share Location">
 
+    <div style="margin-top:14px;">
+    <span class="form-label">Lokasi Makeup</span>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+
+        <label class="slot-item available selected"
+               style="cursor:pointer;flex:1;min-width:200px;"
+               id="lokasiSalon">
+
+            <div class="slot-left">
+                <div class="slot-radio"></div>
+                <span class="slot-time">Datang ke Salon</span>
+            </div>
+
+            <input type="radio" name="lokasi_makeup" value="salon" checked hidden>
+        </label>
+
+        <label class="slot-item available"
+               style="cursor:pointer;flex:1;min-width:200px;"
+               id="lokasiRumah">
+
+            <div class="slot-left">
+                <div class="slot-radio"></div>
+                <span class="slot-time">Home Service</span>
+            </div>
+
+            <input type="radio" name="lokasi_makeup" value="rumah" hidden>
+        </label>
+
+    </div>
+</div>
+
     <textarea id="inputCatatan" class="form-textarea" placeholder="Catatan tambahan (opsional)"></textarea>
 </div>
+            
+            
             <div class="btn-row">
-                <button class="btn-primary" id="btnNext" disabled onclick="goNext()">
-                    Pilih Paket <i class='bx bx-right-arrow-alt'></i>
-                </button>
-            </div>
+    <button class="btn-primary" id="btnNext" onclick="goNext()">
+        Pilih Paket <i class='bx bx-right-arrow-alt'></i>
+    </button>
+</div>
         </div>
     </div>
 </div>
@@ -369,15 +450,166 @@ function selectSlot(el,id,jam){
     document.getElementById('btnNext').disabled=false;
 }
 
-function goNext(){
-    if(!selectedSlotId){showToast('Pilih waktu terlebih dahulu');return;}
-    const nama=document.getElementById('inputNama').value.trim();
-    const hp=document.getElementById('inputHp').value.trim();
-    if(!nama||!hp){showToast('Lengkapi nama dan no. HP');return;}
-    const tanggal='<?= $tanggal ?>';
-    const catatan=document.getElementById('inputCatatan').value.trim();
-    window.location.href='pilih_paket.php?tanggal='+encodeURIComponent(tanggal)+'&jadwal_id='+selectedSlotId+'&jam='+encodeURIComponent(selectedJam)+'&nama='+encodeURIComponent(nama)+'&no_hp='+encodeURIComponent(hp)+'&catatan='+encodeURIComponent(catatan);
+const modeSlot=document.getElementById('modeSlot');
+const modeRequest=document.getElementById('modeRequest');
+const lokasiSalon = document.getElementById('lokasiSalon');
+const lokasiRumah = document.getElementById('lokasiRumah');
+
+lokasiSalon.onclick = () => {
+
+    lokasiSalon.classList.add('selected');
+    lokasiRumah.classList.remove('selected');
+
+    lokasiSalon.querySelector('input').checked = true;
 }
+
+lokasiRumah.onclick = () => {
+
+    lokasiRumah.classList.add('selected');
+    lokasiSalon.classList.remove('selected');
+
+    lokasiRumah.querySelector('input').checked = true;
+}
+
+modeSlot.onclick=()=>{
+
+    modeSlot.classList.add('selected');
+    modeRequest.classList.remove('selected');
+
+    modeSlot.querySelector('input').checked=true;
+
+    document.getElementById('requestJamWrap').style.display='none';
+
+    // kalau belum pilih slot, tombol disable
+    if(!selectedSlotId){
+        document.getElementById('btnNext').disabled=true;
+    }
+
+}
+
+modeRequest.onclick=()=>{
+
+    modeRequest.classList.add('selected');
+    modeSlot.classList.remove('selected');
+
+    modeRequest.querySelector('input').checked=true;
+
+    document.getElementById('requestJamWrap').style.display='block';
+
+    // aktifkan tombol next
+    document.getElementById('btnNext').disabled=false;
+
+}
+
+
+function isTimeConflict(start, end){
+
+    // kalau tidak ada booked slot
+    if(!bookedSlots || bookedSlots.length === 0){
+        return false;
+    }
+
+    for(let slot of bookedSlots){
+
+        let bookedStart = slot.jam_mulai.substring(0,5);
+        let bookedEnd   = slot.jam_selesai.substring(0,5);
+
+        // cek bentrok
+        if(start < bookedEnd && end > bookedStart){
+            return true;
+        }
+    }
+
+    return false;
+}
+function goNext(){
+
+    const modeJam = document.querySelector('input[name="mode_jam"]:checked').value;
+    const lokasiMakeup = document.querySelector('input[name="lokasi_makeup"]:checked').value;
+    const nama = document.getElementById('inputNama').value.trim();
+    const email = document.getElementById('inputEmail').value.trim();
+    const hp = document.getElementById('inputHp').value.trim();
+    const pasangan = document.getElementById('inputPasangan').value.trim();
+    const alamat = document.getElementById('inputAlamat').value.trim();
+    const maps = document.getElementById('inputMaps').value.trim();
+    const catatan = document.getElementById('inputCatatan').value.trim();
+
+    if(!nama || !hp){
+        showToast('Lengkapi nama dan no. HP');
+        return;
+    }
+
+    const tanggal = '<?= $tanggal ?>';
+
+    let finalJam = '';
+    let jadwalId = '';
+
+    // ======================
+    // MODE SLOT BIASA
+    // ======================
+    if(modeJam === 'slot'){
+
+        if(!selectedSlotId){
+            showToast('Pilih slot waktu terlebih dahulu');
+            return;
+        }
+
+        jadwalId = selectedSlotId;
+        finalJam = selectedJam;
+
+    }
+
+    // ======================
+    // MODE REQUEST JAM
+    // ======================
+    else{
+
+        const mulai = document.getElementById('jamMulaiRequest').value;
+        const selesai = document.getElementById('jamSelesaiRequest').value;
+
+        if(!mulai || !selesai){
+            showToast('Lengkapi jam booking');
+            return;
+        }
+
+        if(selesai <= mulai){
+            showToast('Jam selesai harus lebih besar');
+            return;
+        }
+
+        if(isTimeConflict(mulai, selesai)){
+            showToast('Jam bentrok dengan booking lain');
+            return;
+        }
+
+        finalJam = mulai + ' - ' + selesai;
+
+        // request jam tidak pakai slot
+        jadwalId = 0;
+    }
+
+    // ======================
+    // PINDAH HALAMAN
+    // ======================
+
+    const params = new URLSearchParams({
+        tanggal: tanggal,
+        jadwal_id: jadwalId,
+        jam: finalJam,
+        mode_jam: modeJam,
+        nama: nama,
+        email: email,
+        no_hp: hp,
+        pasangan: pasangan,
+        alamat: alamat,
+        maps: maps,
+        lokasi_makeup: lokasiMakeup,
+        catatan: catatan
+    });
+
+    window.location.href = 'pilih_paket.php?' + params.toString();
+}
+const bookedSlots = <?= json_encode($slots) ?>;
 </script>
 </body>
 </html>

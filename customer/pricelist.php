@@ -835,23 +835,23 @@ body {
         <div class="cat-list">
             <div class="cat active" onclick="filter('all', this)">
                 <span>All</span>
-                <span class="cat-count">4</span>
+                <span class="cat-count"></span>
             </div>
             <div class="cat" onclick="filter('wedding', this)">
                 <span>Wedding</span>
-                <span class="cat-count">4</span>
+                <span class="cat-count"></span>
             </div>
             <div class="cat" onclick="filter('graduation', this)">
                 <span>Graduation</span>
-                <span class="cat-count">0</span>
+                <span class="cat-count"></span>
             </div>
             <div class="cat" onclick="filter('photoshoot', this)">
                 <span>Photoshoot</span>
-                <span class="cat-count">0</span>
+                <span class="cat-count"></span>
             </div>
             <div class="cat" onclick="filter('engagement', this)">
                 <span>Engagement</span>
-                <span class="cat-count">0</span>
+                <span class="cat-count"></span>
             </div>
         </div>
     </div>
@@ -889,9 +889,7 @@ body {
         </div>
 
         <div class="pkg-actions">
-    <a href="booking.php" class="btn-book">
-        <i class='bx bx-calendar-check'></i> Book Now
-    </a>
+
 
     <button class="btn-detail"
     onclick="openModal(
@@ -933,9 +931,7 @@ body {
             <div class="modal-desc" id="modal-desc"></div>
             <div class="modal-includes-label">Includes</div>
             <div class="modal-includes" id="modal-includes"></div>
-            <a href="booking.php" class="modal-book-btn">
-                <i class='bx bx-calendar-check'></i> Book This Package
-            </a>
+
         </div>
     </div>
 </div>
